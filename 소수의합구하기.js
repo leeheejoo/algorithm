@@ -26,11 +26,18 @@ function calcSumOfPrimeNumber(num) {
     for (i = 2; i <= num; i++) {
         if (arr[i] != 0){
             sum += arr[i];
-            console.log(`${arr[i]} `);
+            console.log(`prime number is ${arr[i]}`);
         }
     }
 
     console.log(`sum of prime numbers is ${sum}`);
 }
 
-calcSumOfPrimeNumber(1000);
+
+function main() {
+
+    calcSumOfPrimeNumber(1000);
+
+}
+
+main();
