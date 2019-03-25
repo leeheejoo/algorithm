@@ -1,12 +1,13 @@
 /*
-    링크드 리스트를 구현하고 기본 입력 및 삭제, reverse 기능을 추가하시오.
+    이중 링크드 리스트를 구현하고 기본 입력 및 삭제, reverse 기능을 추가하시오.
 */
 
-class LinkedListNode {
+class DoublyLinkedListNode {
 
-    constructor(value, next = null) {
+    constructor(value, next = null, previous = null) {
         this.value = value;
         this.next = next;
+        this.previous = previous;
     }
 
     toString(callback) {
@@ -14,17 +15,21 @@ class LinkedListNode {
     }
 }
 
-
-class LinkedList {
+class DoublyLinkedList {
 
     constructor() {
         this.head = null;
         this.tail = null;
     }
-
+  
     prepend(value) {
 
-        const newNode = new LinkedListNode(value, this.head);
+        const newNode = new DoublyLinkedListNode(value, this.head);
+    
+        if (this.head) {
+            this.head.previous = newNode;
+        }
+
         this.head = newNode;
 
         if (!this.tail) {
@@ -33,10 +38,10 @@ class LinkedList {
 
         return this;
     }
-
+  
     append(value) {
 
-        const newNode = new LinkedListNode(value);
+        const newNode = new DoublyLinkedListNode(value);
 
         if (!this.head) {
             this.head = newNode;
@@ -45,11 +50,14 @@ class LinkedList {
         }
 
         this.tail.next = newNode;
+
+        newNode.previous = this.tail;
+
         this.tail = newNode;
 
         return this;
     }
-
+  
     delete(value) {
 
         if (!this.head) {
@@ -57,41 +65,56 @@ class LinkedList {
         }
 
         let deletedNode = null;
-
-        while (this.head && (this.head.value === value)) {
-            deletedNode = this.head;
-            this.head = this.head.next;
-        }
-
         let currentNode = this.head;
 
-        if (currentNode !== null) {
+        while (currentNode) {
 
-            while (currentNode.next) {
-                if (currentNode.next.value === value) {
-                    deletedNode = currentNode.next;
-                    currentNode.next = currentNode.next.next;
+            if (currentNode.value === value) {
+
+                deletedNode = currentNode;
+
+                if (deletedNode === this.head) {
+
+                    this.head = deletedNode.next;
+
+                    if (this.head) {
+                        this.head.previous = null;
+                    }
+
+                    if (deletedNode === this.tail) {
+                        this.tail = null;
+                    }
+
+                } else if (deletedNode === this.tail) {
+  
+                    this.tail = deletedNode.previous;
+                    this.tail.next = null;
+
                 } else {
-                    currentNode = currentNode.next;
+
+                    const previousNode = deletedNode.previous;
+                    const nextNode = deletedNode.next;
+
+                    previousNode.next = nextNode;
+                    nextNode.previous = previousNode;
                 }
             }
-        }
 
-        if (this.tail.value == value) {
-            this.tail = currentNode;
+            currentNode = currentNode.next;
         }
 
         return deletedNode;
     }
+  
 
     find(value = undefined, callback = undefined) {
 
         if (!this.head) {
             return null;
         }
-
+    
         let currentNode = this.head;
-
+    
         while (currentNode) {
 
             if (callback && callback(currentNode.value)) {
@@ -101,36 +124,37 @@ class LinkedList {
             if (value !== undefined && (currentNode.value === value)) {
                 return currentNode;
             }
-
+    
             currentNode = currentNode.next;
         }
-
+    
         return null;
     }
+  
 
     deleteTail() {
-        const deletedTail = this.tail;
+
+        if (!this.tail) {
+            return null;
+        }
 
         if (this.head === this.tail) {
+
+            const deletedTail = this.tail;
             this.head = null;
             this.tail = null;
+
             return deletedTail;
         }
 
-        let currentNode = this.head;
+        const deletedTail = this.tail;
 
-        while (currentNode.next) {
-            if (!currentNode.next.next) {
-                currentNode.next = null;
-            } else {
-                currentNode = currentNode.next;
-            }
-        }
-
-        this.tail = currentNode;
+        this.tail = this.tail.previous;
+        this.tail.next = null;
 
         return deletedTail;
     }
+  
 
     deleteHead() {
 
@@ -142,6 +166,7 @@ class LinkedList {
 
         if (this.head.next) {
             this.head = this.head.next;
+            this.head.previous = null;
         } else {
             this.head = null;
             this.tail = null;
@@ -149,11 +174,7 @@ class LinkedList {
 
         return deletedHead;
     }
-
-    fromArray(values) {
-        values.forEach(value => this.append(value));
-        return this;
-    }
+  
 
     toArray() {
         const nodes = [];
@@ -167,19 +188,30 @@ class LinkedList {
 
         return nodes;
     }
+  
+    fromArray(values) {
+      values.forEach(value => this.append(value));
+      return this;
+    }
+  
 
     toString(callback) {
         return this.toArray().map(node => node.toString(callback)).toString();
     }
-
+  
     reverse() {
+
         let currNode = this.head;
         let prevNode = null;
         let nextNode = null;
 
         while (currNode) {
+
             nextNode = currNode.next;
+            prevNode = currNode.previous;
+
             currNode.next = prevNode;
+            currNode.previous = nextNode;
 
             prevNode = currNode;
             currNode = nextNode;
@@ -194,7 +226,7 @@ class LinkedList {
 
 function main() {
 
-    let list = new LinkedList();
+    let list = new DoublyLinkedList();
 		
     list.append(1);
     list.append(2);
@@ -214,7 +246,7 @@ function main() {
     //list.deleteTail();
     //list.toString(console.log);
 
-    // let node = list.find(55);
+    // let node = list.find(5);
     // if(node)
     //     console.log(node.toString());
     // else    
