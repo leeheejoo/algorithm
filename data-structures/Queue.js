@@ -40,6 +40,7 @@ module.exports = {
     Queue,
 } 
 
+/*
 function test() {
 
     let queue = new Queue();
@@ -63,3 +64,4 @@ function test() {
 }
 
 test();
+*/
