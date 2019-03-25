@@ -79,7 +79,7 @@ module.exports = {
     HashTable,
 } 
 
-
+/*
 function test() {
 
     let hash = new HashTable();
@@ -103,3 +103,4 @@ function test() {
 }
 
 test();
+*/
