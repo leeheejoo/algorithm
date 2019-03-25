@@ -2,6 +2,8 @@
     링크드 리스트를 구현하고 기본 입력 및 삭제, reverse 기능을 추가하시오.
 */
 
+const Comparator = require("../utils/Comparator").Comparator;
+
 class LinkedListNode {
 
     constructor(value, next = null) {
@@ -16,9 +18,10 @@ class LinkedListNode {
 
 class LinkedList {
 
-    constructor() {
+    constructor(comparatorFunction) {
         this.head = null;
         this.tail = null;
+        this.compare = new Comparator(comparatorFunction);
     }
 
     prepend(value) {
@@ -57,7 +60,7 @@ class LinkedList {
 
         let deletedNode = null;
 
-        while (this.head && (this.head.value === value)) {
+        while (this.head && this.compare.equal(this.head.value, value)) {
             deletedNode = this.head;
             this.head = this.head.next;
         }
@@ -67,7 +70,7 @@ class LinkedList {
         if (currentNode !== null) {
 
             while (currentNode.next) {
-                if (currentNode.next.value === value) {
+                if (this.compare.equal(currentNode.next.value, value)) {
                     deletedNode = currentNode.next;
                     currentNode.next = currentNode.next.next;
                 } else {
@@ -76,7 +79,7 @@ class LinkedList {
             }
         }
 
-        if (this.tail.value == value) {
+        if (this.compare.equal(this.tail.value, value)) {
             this.tail = currentNode;
         }
 
@@ -97,7 +100,7 @@ class LinkedList {
                 return currentNode;
             }
 
-            if (value !== undefined && (currentNode.value === value)) {
+            if (value !== undefined && this.compare.equal(currentNode.value, value)) {
                 return currentNode;
             }
 
@@ -218,7 +221,7 @@ function test() {
     //list.deleteTail();
     //list.toString(console.log);
 
-    // let node = list.find(55);
+    // let node = list.find(5);
     // if(node)
     //     console.log(node.toString());
     // else    
@@ -229,5 +232,4 @@ function test() {
 }
 
 test();
-
 */

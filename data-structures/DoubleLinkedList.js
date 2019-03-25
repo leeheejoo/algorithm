@@ -1,6 +1,7 @@
 /*
     이중 링크드 리스트를 구현하고 기본 입력 및 삭제, reverse 기능을 추가하시오.
 */
+const Comparator = require("../utils/Comparator").Comparator;
 
 class DoublyLinkedListNode {
 
@@ -17,9 +18,10 @@ class DoublyLinkedListNode {
 
 class DoublyLinkedList {
 
-    constructor() {
+    constructor(comparatorFunction) {
         this.head = null;
         this.tail = null;
+        this.compare = new Comparator(comparatorFunction);
     }
   
     prepend(value) {
@@ -69,7 +71,7 @@ class DoublyLinkedList {
 
         while (currentNode) {
 
-            if (currentNode.value === value) {
+            if (this.compare.equal(currentNode.value, value)) {
 
                 deletedNode = currentNode;
 
@@ -121,7 +123,7 @@ class DoublyLinkedList {
                 return currentNode;
             }
 
-            if (value !== undefined && (currentNode.value === value)) {
+            if (value !== undefined && this.compare.equal(currentNode.value, value)) {
                 return currentNode;
             }
     

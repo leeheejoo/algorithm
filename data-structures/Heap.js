@@ -2,15 +2,18 @@
     최대힘 및 최소힙을 구현하시오.
 */
 
+const Comparator = require("../utils/Comparator").Comparator;
+
 class Heap {
 
-    constructor() {
+    constructor(comparatorFunction) {
 
         if (new.target === Heap) {
             throw new TypeError('Cannot construct Heap instance directly');
         }
     
         this.heapContainer = [];
+        this.compare = new Comparator(comparatorFunction);
     }
   
     getLeftChildIndex(parentIndex) {
@@ -87,13 +90,13 @@ class Heap {
         return this;
     }
   
-    remove(item) {
+    remove(item, comparator = this.compare) {
 
-        const numberOfItemsToRemove = this.find(item).length;
+        const numberOfItemsToRemove = this.find(item,comparator).length;
     
         for (let iteration = 0; iteration < numberOfItemsToRemove; iteration += 1) {
 
-            const indexToRemove = this.find(item).pop();
+            const indexToRemove = this.find(item,comparator).pop();
     
             if (indexToRemove === (this.heapContainer.length - 1)) {
                 this.heapContainer.pop();
@@ -112,12 +115,12 @@ class Heap {
         return this;
     }
   
-    find(item) {
+    find(item, comparator = this.compare) {
 
         const foundItemIndices = [];
     
         for (let itemIndex = 0; itemIndex < this.heapContainer.length; itemIndex += 1) {
-            if (item === this.heapContainer[itemIndex]) {
+            if (comparator.equal(item, this.heapContainer[itemIndex])) {
                 foundItemIndices.push(itemIndex);
             }
         }
@@ -176,14 +179,14 @@ class Heap {
 class MaxHeap extends Heap {
 
     pairIsInCorrectOrder(firstElement, secondElement) {
-        return firstElement >= secondElement;
+        return this.compare.greaterThanOrEqual(firstElement, secondElement);
     }
 }
 
 class MinHeap extends Heap {
 
     pairIsInCorrectOrder(firstElement, secondElement) {
-         return firstElement <= secondElement;
+         return this.compare.lessThanOrEqual(firstElement, secondElement);;
     }
 }
 
