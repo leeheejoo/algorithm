@@ -1,4 +1,6 @@
-
+/*
+    임의의 수를 입력 받아 임의의 수보다 작은 소수의 합을 구하시오.
+*/
 
 function calcSumOfPrimeNumber(num) {
 
