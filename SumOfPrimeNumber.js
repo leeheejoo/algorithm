@@ -36,10 +36,10 @@ function calcSumOfPrimeNumber(num) {
 }
 
 
-function main() {
+function test() {
 
     calcSumOfPrimeNumber(1000);
 
 }
 
-main();
+test();

@@ -111,11 +111,13 @@ class BinaryTree {
 
 }
 
-module.exports = new BinaryTree(); 
+module.exports = {
+    BinaryTree,
+} 
 
 /*
 
-function main() {
+function test() {
 
     let tree = new BinaryTree();
 		
@@ -135,6 +137,6 @@ function main() {
     tree.postOrder(tree.root);
 }
 
-main();
+test();
 
 */

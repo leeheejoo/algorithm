@@ -14,7 +14,6 @@ class LinkedListNode {
     }
 }
 
-
 class LinkedList {
 
     constructor() {
@@ -192,11 +191,12 @@ class LinkedList {
     }
 }
 
-module.exports = new LinkedList(); 
+module.exports = {
+    LinkedList,
+}
 
 /*
-
-function main() {
+function test() {
 
     let list = new LinkedList();
 		
@@ -228,6 +228,6 @@ function main() {
     // list.toString(console.log);
 }
 
-main();
+test();
 
 */

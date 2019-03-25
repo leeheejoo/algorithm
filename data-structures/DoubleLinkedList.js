@@ -224,11 +224,13 @@ class DoublyLinkedList {
     }
 }
 
-module.exports = new DoublyLinkedList(); 
+module.exports = {
+    DoublyLinkedList,
+} 
 
 /*
 
-function main() {
+function test() {
 
     let list = new DoublyLinkedList();
 		
@@ -260,6 +262,6 @@ function main() {
     // list.toString(console.log);
 }
 
-main();
+test();
 
 */
