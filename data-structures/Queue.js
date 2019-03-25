@@ -1,3 +1,7 @@
+/*
+    큐를 구현하고 enqueue 및 dequeue 기능을 추가하시오.
+*/
+
 const LinkedList = require("./LinkedList").LinkedList;
 
 class Queue {
