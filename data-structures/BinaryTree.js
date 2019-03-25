@@ -2,7 +2,7 @@
     이진 트리를 구현하고 전위, 중위, 후위 탐색기능을 추가하세요.
 */
 
-class Node {
+class BinaryTreeNode {
 
     constructor(value, left, right) {
         this.value = value;
@@ -35,7 +35,7 @@ class Node {
     }
 };
 
-class Tree {
+class BinaryTree {
 
     constructor() {
         this.root = null;
@@ -44,7 +44,7 @@ class Tree {
 	addNode(value) {
     
         if (this.root == null) {
-			let node = new Node();
+			let node = new BinaryTreeNode();
 			node.setValue(value);
 			this.root = node; // root에 값이 없으면, root에 값을 넣는다.
 		} else {
@@ -59,7 +59,7 @@ class Tree {
         if (value <= root.getValue()) {
 
 			if (root.getLeft() == null) {
-				let node = new Node();
+				let node = new BinaryTreeNode();
 				node.setValue(value);
 				root.setLeft(node);
 			} else {
@@ -69,7 +69,7 @@ class Tree {
 		} else {
 
 			if (root.getRight() == null) {
-				let node = new Node();
+				let node = new BinaryTreeNode();
 				node.setValue(value);
 				root.setRight(node);
 			} else {
@@ -111,10 +111,13 @@ class Tree {
 
 }
 
+module.exports = new BinaryTree(); 
+
+/*
 
 function main() {
 
-    let tree = new Tree();
+    let tree = new BinaryTree();
 		
     tree.addNode(24);
     tree.addNode(15);
@@ -133,3 +136,5 @@ function main() {
 }
 
 main();
+
+*/

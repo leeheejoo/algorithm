@@ -1,13 +1,12 @@
 /*
-    이중 링크드 리스트를 구현하고 기본 입력 및 삭제, reverse 기능을 추가하시오.
+    링크드 리스트를 구현하고 기본 입력 및 삭제, reverse 기능을 추가하시오.
 */
 
-class DoublyLinkedListNode {
+class LinkedListNode {
 
-    constructor(value, next = null, previous = null) {
+    constructor(value, next = null) {
         this.value = value;
         this.next = next;
-        this.previous = previous;
     }
 
     toString(callback) {
@@ -15,21 +14,17 @@ class DoublyLinkedListNode {
     }
 }
 
-class DoublyLinkedList {
+
+class LinkedList {
 
     constructor() {
         this.head = null;
         this.tail = null;
     }
-  
+
     prepend(value) {
 
-        const newNode = new DoublyLinkedListNode(value, this.head);
-    
-        if (this.head) {
-            this.head.previous = newNode;
-        }
-
+        const newNode = new LinkedListNode(value, this.head);
         this.head = newNode;
 
         if (!this.tail) {
@@ -38,10 +33,10 @@ class DoublyLinkedList {
 
         return this;
     }
-  
+
     append(value) {
 
-        const newNode = new DoublyLinkedListNode(value);
+        const newNode = new LinkedListNode(value);
 
         if (!this.head) {
             this.head = newNode;
@@ -50,14 +45,11 @@ class DoublyLinkedList {
         }
 
         this.tail.next = newNode;
-
-        newNode.previous = this.tail;
-
         this.tail = newNode;
 
         return this;
     }
-  
+
     delete(value) {
 
         if (!this.head) {
@@ -65,56 +57,41 @@ class DoublyLinkedList {
         }
 
         let deletedNode = null;
+
+        while (this.head && (this.head.value === value)) {
+            deletedNode = this.head;
+            this.head = this.head.next;
+        }
+
         let currentNode = this.head;
 
-        while (currentNode) {
+        if (currentNode !== null) {
 
-            if (currentNode.value === value) {
-
-                deletedNode = currentNode;
-
-                if (deletedNode === this.head) {
-
-                    this.head = deletedNode.next;
-
-                    if (this.head) {
-                        this.head.previous = null;
-                    }
-
-                    if (deletedNode === this.tail) {
-                        this.tail = null;
-                    }
-
-                } else if (deletedNode === this.tail) {
-  
-                    this.tail = deletedNode.previous;
-                    this.tail.next = null;
-
+            while (currentNode.next) {
+                if (currentNode.next.value === value) {
+                    deletedNode = currentNode.next;
+                    currentNode.next = currentNode.next.next;
                 } else {
-
-                    const previousNode = deletedNode.previous;
-                    const nextNode = deletedNode.next;
-
-                    previousNode.next = nextNode;
-                    nextNode.previous = previousNode;
+                    currentNode = currentNode.next;
                 }
             }
+        }
 
-            currentNode = currentNode.next;
+        if (this.tail.value == value) {
+            this.tail = currentNode;
         }
 
         return deletedNode;
     }
-  
 
     find(value = undefined, callback = undefined) {
 
         if (!this.head) {
             return null;
         }
-    
+
         let currentNode = this.head;
-    
+
         while (currentNode) {
 
             if (callback && callback(currentNode.value)) {
@@ -124,37 +101,36 @@ class DoublyLinkedList {
             if (value !== undefined && (currentNode.value === value)) {
                 return currentNode;
             }
-    
+
             currentNode = currentNode.next;
         }
-    
+
         return null;
     }
-  
 
     deleteTail() {
-
-        if (!this.tail) {
-            return null;
-        }
+        const deletedTail = this.tail;
 
         if (this.head === this.tail) {
-
-            const deletedTail = this.tail;
             this.head = null;
             this.tail = null;
-
             return deletedTail;
         }
 
-        const deletedTail = this.tail;
+        let currentNode = this.head;
 
-        this.tail = this.tail.previous;
-        this.tail.next = null;
+        while (currentNode.next) {
+            if (!currentNode.next.next) {
+                currentNode.next = null;
+            } else {
+                currentNode = currentNode.next;
+            }
+        }
+
+        this.tail = currentNode;
 
         return deletedTail;
     }
-  
 
     deleteHead() {
 
@@ -166,7 +142,6 @@ class DoublyLinkedList {
 
         if (this.head.next) {
             this.head = this.head.next;
-            this.head.previous = null;
         } else {
             this.head = null;
             this.tail = null;
@@ -174,7 +149,11 @@ class DoublyLinkedList {
 
         return deletedHead;
     }
-  
+
+    fromArray(values) {
+        values.forEach(value => this.append(value));
+        return this;
+    }
 
     toArray() {
         const nodes = [];
@@ -188,30 +167,19 @@ class DoublyLinkedList {
 
         return nodes;
     }
-  
-    fromArray(values) {
-      values.forEach(value => this.append(value));
-      return this;
-    }
-  
 
     toString(callback) {
         return this.toArray().map(node => node.toString(callback)).toString();
     }
-  
-    reverse() {
 
+    reverse() {
         let currNode = this.head;
         let prevNode = null;
         let nextNode = null;
 
         while (currNode) {
-
             nextNode = currNode.next;
-            prevNode = currNode.previous;
-
             currNode.next = prevNode;
-            currNode.previous = nextNode;
 
             prevNode = currNode;
             currNode = nextNode;
@@ -224,9 +192,13 @@ class DoublyLinkedList {
     }
 }
 
+module.exports = new LinkedList(); 
+
+/*
+
 function main() {
 
-    let list = new DoublyLinkedList();
+    let list = new LinkedList();
 		
     list.append(1);
     list.append(2);
@@ -246,7 +218,7 @@ function main() {
     //list.deleteTail();
     //list.toString(console.log);
 
-    // let node = list.find(5);
+    // let node = list.find(55);
     // if(node)
     //     console.log(node.toString());
     // else    
@@ -257,3 +229,5 @@ function main() {
 }
 
 main();
+
+*/
