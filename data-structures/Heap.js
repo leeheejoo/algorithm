@@ -131,6 +131,10 @@ class Heap {
     isEmpty() {
         return !this.heapContainer.length;
     }
+    
+    getLength() {
+        return this.heapContainer.length;
+    }
 
     toString() {
         return this.heapContainer.toString();

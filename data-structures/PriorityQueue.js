@@ -71,6 +71,7 @@ function test() {
     pq.add(11,11);
     pq.add(5,5);
     pq.add(7,7);
+    pq.remove(2);
 
     // pq.add(6,11);
     // pq.add(3,2);
@@ -80,7 +81,8 @@ function test() {
     // pq.add(5,3);
     // pq.add(7,7);
 
-    for(let i=0; i <7; i++)
+    let length = pq.getLength();
+    for(let i=0; i < length; i++)
         console.log(pq.poll());    
 
 }
