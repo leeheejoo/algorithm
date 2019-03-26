@@ -94,7 +94,7 @@ class Heap {
 
         const numberOfItemsToRemove = this.find(item,comparator).length;
     
-        for (let iteration = 0; iteration < numberOfItemsToRemove; iteration += 1) {
+        for (let iteration = 0; iteration < numberOfItemsToRemove; iteration++) {
 
             const indexToRemove = this.find(item,comparator).pop();
     
@@ -119,7 +119,7 @@ class Heap {
 
         const foundItemIndices = [];
     
-        for (let itemIndex = 0; itemIndex < this.heapContainer.length; itemIndex += 1) {
+        for (let itemIndex = 0; itemIndex < this.heapContainer.length; itemIndex++) {
             if (comparator.equal(item, this.heapContainer[itemIndex])) {
                 foundItemIndices.push(itemIndex);
             }
