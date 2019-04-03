@@ -30,6 +30,7 @@ function trialDivision(number) {
     return true;
 }
 
+/*
 function test() {
 
     let num = 29;
@@ -37,3 +38,4 @@ function test() {
 }
 
 test();
+*/

@@ -63,7 +63,7 @@ function fibonacciClosedForm(position) {
     return Math.floor((phi ** position) / sqrt5 + 0.5);
 }
 
-
+/*
 function test() {
 
     let num = 11;
@@ -73,3 +73,4 @@ function test() {
 }
 
 test();
+*/

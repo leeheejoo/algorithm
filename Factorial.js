@@ -14,7 +14,7 @@ function factorialRecursive(number) {
     return number > 1 ? number * factorialRecursive(number - 1) : 1;
 }
 
-
+/*
 function test() {
 
     console.log(factorial(10));
@@ -22,3 +22,4 @@ function test() {
 }
 
 test();
+*/
