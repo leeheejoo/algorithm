@@ -35,7 +35,7 @@ function calcSumOfPrimeNumber(num) {
     console.log(`sum of prime numbers is ${sum}`);
 }
 
-
+/*
 function test() {
 
     calcSumOfPrimeNumber(1000);
@@ -43,3 +43,4 @@ function test() {
 }
 
 test();
+*/
