@@ -15,9 +15,10 @@ function hammingDistance(a, b) {
     return distance;
 }
 
-
+/*
 function test() {
     let ret = hammingDistance('asdffgh', '1sdfsdh');
     console.log(ret.toString());
 }
 test();
+*/

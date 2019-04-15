@@ -34,9 +34,10 @@ function rabinKarp(text, word) {
     return -1;
 }
 
-
+/*
 function test() {
     let ret = rabinKarp('abvdkleoasbababkdiel.eaababa', 'baba');
     console.log(ret.toString());
 }
 test();
+*/

@@ -24,9 +24,9 @@ class PolynomialHash {
 
         let hash = 0;
         for (let charIndex = 0; charIndex < charCodes.length; charIndex += 1) {
-        hash *= this.base;
-        hash += charCodes[charIndex];
-        hash %= this.modulus;
+            hash *= this.base;
+            hash += charCodes[charIndex];
+            hash %= this.modulus;
         }
 
         return hash;

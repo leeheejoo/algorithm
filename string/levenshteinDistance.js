@@ -32,10 +32,11 @@ function levenshteinDistance(a, b) {
     return distanceMatrix[b.length][a.length];
 }
 
-
+/*
 function test() {
     let ret = levenshteinDistance('asdffgh', 'sdfh1');
     console.log(ret.toString());
 }
 
 test();
+*/
