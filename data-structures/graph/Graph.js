@@ -154,7 +154,7 @@ module.exports = {
     Graph,
 } 
 
-
+/*
 function test() {
 
     let grahp = new Graph();
@@ -225,3 +225,4 @@ function test() {
 }
 
 test();
+*/
