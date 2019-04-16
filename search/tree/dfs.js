@@ -39,6 +39,7 @@ module.exports = {
     depthFirstSearch,
 } 
 
+/*
 function enterNode(node) {
     console.log(`enter node ${node.value}`);
 }
@@ -68,3 +69,4 @@ function test() {
 
 test();
 
+*/
