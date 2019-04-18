@@ -141,12 +141,21 @@ function test() {
 
         console.log(`************* vertex${key} : distance ${ret.distances[key]}**************`);
 
-        // let vertex = ret.previousVertices[key];
-        // if(vertex) {
-        //     let size = vertex.edges.toArray().length;
-        //     vertex.edges.toString(e => { console.log(e.getKey()) });
-        // }
+        let vertex = ret.previousVertices[key];
+        let path;
+        while(vertex){
+            let pv = vertex.getKey();
 
+            if(path)
+                path += `->${pv}`; 
+            else
+                path = pv;
+
+            vertex = ret.previousVertices[pv];
+        }
+
+        if(path)
+            console.log(path);
     });
 
 }
