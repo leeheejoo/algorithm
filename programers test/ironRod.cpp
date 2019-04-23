@@ -18,18 +18,18 @@ int solution(string arrangement) {
 
     arrangement = replaceAll(arrangement, "()","1");
 
-    stack<int> values;
+    stack<int> counts;
 
     for(int i=0; i<arrangement.size(); i++){
 
         if(arrangement[i] == '(')
-            values.push(1);
+            counts.push(1);
         else if(arrangement[i] == ')'){
-            values.pop();
+            counts.pop();
             answer += 1;
         }
         else
-            answer += values.size(); 
+            answer += counts.size(); 
     }
 
     return answer;
