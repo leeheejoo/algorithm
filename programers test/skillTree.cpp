@@ -28,47 +28,87 @@ BDA: B 스킬을 배우기 전에 C 스킬을 먼저 배워야 합니다. 불가
 
 */
 
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
-#include <map>
+/*
+#include <string>
 
 using namespace std;
 
-// skill_trees_len은 skill_trees의 길이입니다.
+// c++
 int solution(char* skill, char* skill_trees[], size_t skill_trees_len) {
   
     int answer = 0;
 
     for(int i = 0; i < skill_trees_len; i++){
 
-        char* skt = skill_trees[i];
-        map<char,int> skMap;
+        string sk(skill);
+        string skt(skill_trees[i]);
 
-        for(int t = 0; t < strlen(skt); t++){
-            skMap.insert(make_pair(skt[t],t));      
-        }
+        int skStep = -1;
+        bool enable = true;
 
-        int skStep = 0;
+        for(int s = 0; s < sk.size(); s++){
 
-        for(int s = 0; s < strlen(skill); s++){
             char sk = skill[s];
-            int skIdx = skMap[sk];   
+            int skIdx = skt.find(sk);   
 
-            if(skStep < skIdx)
+            if(skIdx == string::npos)
+                skStep = skt.size();
+            else if(skStep < skIdx)
                 skStep = skIdx;
-            else
+            else{
+                enable = false;
                 break;
-
-            if(s == strlen(skill)-1)
-                answer++;
+            }   
         }
 
+        if(enable)
+            answer++;
     }
 
     return answer;
 }
+*/
+
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+
+// c code
+int solution(char* skill, char* skill_trees[], size_t skill_trees_len) {
+  
+    int answer = 0;
+
+    for(int i = 0; i < skill_trees_len; i++){
+        
+        char* skt = skill_trees[i];
+
+        int skStep = 0;
+        bool enable = true;
+
+        for(int s = 0; s < strlen(skill); s++){
+            char sk = skill[s];
+            char* find = strchr(skt,sk);
+            int skIdx = find-skt+1;  
+
+            if(find == NULL)
+                skStep = strlen(skt);
+            else if(skStep < skIdx)
+                skStep = skIdx;
+            else{
+                enable = false;
+                break;
+            }   
+        }
+
+        if(enable)
+            answer++;
+    }
+
+    return answer;
+}
+
 
 int main() {
 

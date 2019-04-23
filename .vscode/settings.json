@@ -3,6 +3,7 @@
         "*.go": "go",
         "vector": "cpp",
         "queue": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "xstring": "cpp"
     }
 }
