@@ -1,44 +1,36 @@
-#include <string>
-#include <vector>
-#include <algorithm>
-
+#include<iostream>
+#include<vector>
 using namespace std;
 
-char map124[] = {'1','2','4'};
-
-char toChar(int v)
+string solution(int n)
 {
-   return map124[v];
-}
-
-string solution(int n) {
     string answer = "";
+    int nCurrent = n - 1;
 
-    while(true){
+    while(nCurrent >= 0)
+    {
+        int nDivide = nCurrent / 3;
+        int nRemain = nCurrent % 3;
 
-        int m = n/3;
-        int r = n%3;
-
-        answer.push_back(toChar(r));
+        switch(nRemain)
+        {
+            case 0: answer.insert(0, "1"); break;
+            case 1: answer.insert(0, "2"); break;
+            case 2: answer.insert(0, "4"); break;
+        }
         
-        if(m < 3){
-            answer.push_back(toChar(m));
-            break;
-        }
-        else {
-            n = m;
-        }
+        nCurrent = nDivide - 1;
     }
-
-    reverse(answer.begin(), answer.end());
 
     return answer;
 }
 
 int main() {
 
-    string ret = solution(11);
-    printf("%s",ret.c_str());
+    for(int i=1; i <= 20 ; i++){
+        string ret = solution(i);
+        printf("%d --> %s\n",i,ret.c_str());
+    }
 
     getchar();
 
