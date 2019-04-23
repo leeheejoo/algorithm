@@ -4,6 +4,8 @@
         "vector": "cpp",
         "queue": "cpp",
         "map": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "algorithm": "cpp",
+        "stack": "cpp"
     }
 }
