@@ -6,6 +6,7 @@
         "map": "cpp",
         "xstring": "cpp",
         "algorithm": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "cmath": "cpp"
     }
 }
