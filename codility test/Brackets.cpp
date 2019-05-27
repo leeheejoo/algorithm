@@ -37,8 +37,6 @@ int solution(string &S) {
 
     stack<char> st;
 
-    int count = 0;
-
     for(int i=0; i<S.size(); i++){
         if(S[i] =='(' || S[i] =='{' || S[i] =='['){
             st.push(S[i]);
